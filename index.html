@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="estilo.css"/>
+</head>
+<body>
+    
+    <div id="container">
+        <div id="painel-esquerdo">
+            <input type="text" id="jogador1" placeholder="Digite o jogador 1 (O)" class="input-jogador"/>
+            <input type="text" id="jogador2" placeholder="Digite o jogador 2 (x)" class="input-jogador"/>
+            <div id="historico-jogadores" class="historico">
+            </div>
+        </div>
+        <div id="painel-direito">
+            <div id="tabela-pontos">
+                <h5 id="placar-jogadores">(Jogador 1) 0 X 0 (Jogador 2)</h5>
+            </div>
+            <div id="tabuleiro" >
+                <div class="tabuleiro-linha" id="linha-um">
+                    <button id="0,0" type="button" class="tabuleiro-jogada" onclick="jogada(0,0)" ></button>
+                    <button id="0,1" type="button" class="tabuleiro-jogada" onclick="jogada(0,1)" ></button>
+                    <button id="0,2" type="button" class="tabuleiro-jogada" onclick="jogada(0,2)" ></button>
+                </div>
+                <div class="tabuleiro-linha" id="linha-dois">
+                    <button id="1,0" type="button" class="tabuleiro-jogada" onclick="jogada(1,0)" ></button>
+                    <button id="1,1" type="button" class="tabuleiro-jogada" onclick="jogada(1,1)" ></button>
+                    <button id="1,2" type="button" class="tabuleiro-jogada" onclick="jogada(1,2)" ></button>
+                </div>
+                <div class="tabuleiro-linha" id="linha-tres">
+                    <button id="2,0" type="button" class="tabuleiro-jogada" onclick="jogada(2,0)" ></button>
+                    <button id="2,1" type="button" class="tabuleiro-jogada" onclick="jogada(2,1)" ></button>
+                    <button id="2,2" type="button" class="tabuleiro-jogada" onclick="jogada(2,2)" ></button>
+                </div>
+            </div>
+
+            <div id="container-acao">
+                <button id="botao-iniciar" onclick="comecar()" disabled="" >Começar o Jogo!</button>
+            </div>
+        </div>
+    </div>
+    <div id="dv-modal" class="modal">
+        <div class="modal-content">
+                <h1 id="jogador-vencedor"></h1>
+                <button id="botao-modal" onclick="closeModal('dv-modal')">Fechar</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

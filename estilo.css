@@ -1,0 +1,187 @@
+body{
+    background-color: #333;
+    color:#fff;
+    font-size: 24px;
+    font-family: arial;
+    margin:0;
+    padding:0;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+#painel-esquerdo{
+    display: flex;
+    flex:1;
+    border-right: 1px dashed #ccc;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+
+}
+
+.input-jogador{
+    height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color:#333;
+    text-align: center;
+}
+
+.input-jogador::placeholder{
+    color:#ccc;
+}
+
+#painel-direito{
+    display: flex;
+    flex:4;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#tabuleiro{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    height: 50vh;
+    
+}
+
+.tabuleiro-linha{
+    display: flex;
+    flex-direction: row;
+    flex:1;
+    border-bottom: 1px solid rgb(162, 160, 160);
+}
+
+.tabuleiro-linha:last-child{
+    border-bottom: 0px;
+}
+
+.tabuleiro-jogada{
+    
+    height: 152px;
+    display: flex;
+    flex:1;
+    align-items: center;
+    justify-content: center;
+    font-size:90px;
+    cursor: pointer;
+    border-right: 1px solid rgb(196, 196, 196);
+    color:#fbfbfb;
+    background-color: #3f3f3f;
+   
+}
+.tabuleiro-jogada:hover{
+    color:#DD13F0;
+    background-color: #3f3f3f;
+}
+
+.tabuleiro-jogada:last-child{
+    border-right: 0px;
+  
+}
+
+.tabuleiro-jogada2{
+    
+  
+    color:#ff03b3;
+   
+}
+
+
+#tabela-pontos {
+   
+    font-size:20px;
+    color:#fbfbfb;
+    background-color: #3f3f3f;
+    padding: 0px 50px;
+    margin-bottom: 55px;
+}
+
+.historico{
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+#container-acao{
+    margin-top: 100px;
+}
+
+#botao-iniciar{
+    background-color: #861480;
+    width: 40vw;
+    height: 60px;
+    border:2px solid #f903a9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color:rgba(238, 238, 238, 0.713);
+    font-size: 24px;
+   
+}
+
+#botao-iniciar:disabled{
+    color:#666666;
+    background-color: #861480;
+}
+
+#botao-iniciar:hover{
+    opacity: 0.8;
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;    
+}
+
+.modal-content {
+    border:2px solid #f903a9;
+    border-radius: 10px;
+    margin: auto;
+    max-width: 600px;
+    max-height: 200px;
+    background-color: rgb(44, 43, 43);
+    padding: 20;
+    box-shadow: 0 0 2px #fff;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#botao-modal{
+   
+        background-color: #861480;
+        height: 60px;
+        width: 200px;
+        border:2px solid #f903a9;
+        border-radius: 10px;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        cursor: pointer;
+        color:rgba(254, 254, 254, 0.713);
+        font-size: 24px;
+        margin-bottom: 20px;
+       
+
+}
