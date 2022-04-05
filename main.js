@@ -14,9 +14,14 @@ PONTOS DA AV1:
 
 let jogador1;
 let jogador2;
+let txtJogador1 = document.getElementById('jogador1');
+let txtJogador2 = document.getElementById('jogador2');
+let botaoIniciar = document.getElementById("botao-iniciar");
+let jogadorVencedor = document.getElementById("jogador-vencedor");
+let tabuleirosJogadas = document.getElementsByClassName("tabuleiro-jogada");
+txtJogador1.addEventListener('keyup', checkComecar);
+txtJogador2.addEventListener('keyup', checkComecar);
 let verificaJogada = 'O';
-document.getElementById('jogador1').addEventListener('keyup', checkComecar);
-document.getElementById('jogador2').addEventListener('keyup', checkComecar);
 var tabuleiro = [[], [], []];
 bloquearTabuleiro(true);
 let contEmpate = 0;
@@ -28,59 +33,54 @@ function limparTabuleiro() {
         }
     }
 
-    let tabuleiros = document.getElementsByClassName("tabuleiro-jogada");
 
-    for (let index = 0; index < tabuleiros.length; index++) {
-        tabuleiros[index].innerText = " ";
+
+    for (let index = 0; index < tabuleirosJogadas.length; index++) {
+        tabuleirosJogadas[index].innerText = " ";
     }
 }
 
 function bloquearTabuleiro(controle) {
-    let tabuleiros = document.getElementsByClassName("tabuleiro-jogada");
-    
-        for (let index = 0; index < tabuleiros.length; index++) {
-            tabuleiros[index].disabled = controle;
-        }
-    
+    for (let index = 0; index < tabuleirosJogadas.length; index++) {
+        tabuleirosJogadas[index].disabled = controle;
+    }
 }
 
 function checkComecar() {
+    var nome1 = txtJogador1.value.trim();
+    var nome2 = txtJogador2.value.trim();
 
-    var nome1 = document.getElementById("jogador1").value.trim();
-    var nome2 = document.getElementById("jogador2").value.trim();
-
-    jogador1 = { nome: nome1, x: "X", vitorias: 0};
-    jogador2 = { nome: nome2, o: "O", vitorias: 0};
+    jogador1 = { nome: nome1, x: "X", vitorias: 0 };
+    jogador2 = { nome: nome2, o: "O", vitorias: 0 };
 
     if (jogador1.nome.length > 0 && jogador2.nome.length > 0)
-        document.getElementById("botao-iniciar").disabled = false;
+        botaoIniciar.disabled = false;
     else
-        document.getElementById("botao-iniciar").disabled = true;
+        botaoIniciar.disabled = true;
 }
 
-function restart(){
+function restart() {
     limparTabuleiro();
     jogador1 = '';
     jogador2 = '';
-    document.getElementById("botao-iniciar").disabled = true;
-    document.getElementById('jogador1').disabled = false;
-    document.getElementById('jogador2').disabled = false;
-    document.getElementById('jogador1').value = '';
-    document.getElementById('jogador2').value = '';
+    botaoIniciar.disabled = true;
+    txtJogador1.disabled = false;
+    txtJogador2.disabled = false;
+    txtJogador1.value = '';
+    txtJogador2.value = '';
     document.getElementById("placar-jogadores").innerHTML = '(Jogador 1) 0 X 0 (Jogador 2)';
     bloquearTabuleiro(true);
 }
 
 function comecar() {
     bloquearTabuleiro(false);
-    document.getElementById("botao-iniciar").disabled = true;
-    document.getElementById('jogador1').disabled = true;
-    document.getElementById('jogador2').disabled = true;
+    botaoIniciar.disabled = true;
+    txtJogador1.disabled = true;
+    txtJogador2.disabled = true;
     let placarJogadores = document.getElementById("placar-jogadores");
     placarJogadores.innerHTML = `${jogador1.nome} ${jogador1.vitorias} X ${jogador2.vitorias} ${jogador2.nome}`;
     limparTabuleiro();
 }
-
 
 function jogada(posX, posY) {
     let pos = posX + "," + posY
@@ -101,44 +101,41 @@ function jogada(posX, posY) {
         tabuleiro[posX][posY] = verificaJogada;
     }
     if (verificaLinha() || verificaDiagonalInvertida() ||
-        verificaColuna() || verificaDiagonal()){
-            if (verificaJogada === 'X') {
-                jogador1.vitorias++;
-                openModal('dv-modal');
-                document.getElementById("jogador-vencedor").innerText = `${jogador1.nome} ganhou ${jogador1.vitorias}/3!!`;
-                comecar();
-                contEmpate = 0;
-            }else {
-                jogador2.vitorias++;
-                openModal('dv-modal');
-                document.getElementById("jogador-vencedor").innerText = `${jogador2.nome} ganhou ${jogador2.vitorias}/3`;
-                comecar();
-                contEmpate = 0;
-            }
+        verificaColuna() || verificaDiagonal()) {
+        if (verificaJogada === 'X') {
+            jogador1.vitorias++;
+            openModal('dv-modal');
+            jogadorVencedor.innerText = `${jogador1.nome} ganhou ${jogador1.vitorias}/3!!`;
+            comecar();
+            contEmpate = 0;
+        } else {
+            jogador2.vitorias++;
+            openModal('dv-modal');
+            jogadorVencedor.innerText = `${jogador2.nome} ganhou ${jogador2.vitorias}/3`;
+            comecar();
+            contEmpate = 0;
+        }
     }
 
     if (jogador1.vitorias === 3) {
         openModal('dv-modal');
-        document.getElementById("botao-iniciar").disabled = false;
-        document.getElementById("jogador-vencedor").innerText = `${jogador1.nome} venceu!!`;
-        
+        botaoIniciar.disabled = false;
+        jogadorVencedor.innerText = `${jogador1.nome} venceu!!`;
+
         historicoJogadores.innerHTML += `<p>${jogador1.nome} ${jogador1.vitorias} X ${jogador2.vitorias} ${jogador2.nome}</p>`;
         restart();
-    } else if (jogador2.vitorias === 3){
-        document.getElementById("botao-iniciar").disabled = false;
-        document.getElementById("jogador-vencedor").innerText = `${jogador2.nome} venceu!!`;
-        
+    } else if (jogador2.vitorias === 3) {
+        botaoIniciar.disabled = false;
+        jogadorVencedor.innerText = `${jogador2.nome} venceu!!`;
+
         historicoJogadores.innerHTML += `<p>${jogador1.nome} ${jogador1.vitorias} X ${jogador2.vitorias} ${jogador2.nome}</p>`;
         restart();
-    }else if (contEmpate === 9){
+    } else if (contEmpate === 9) {
         openModal('dv-modal');
-        document.getElementById("jogador-vencedor").innerText = `Empatou!!`;
+        jogadorVencedor.innerText = `Empatou!!`;
         comecar();
         contEmpate = 0;
     }
-
-
-    console.info(tabuleiro);
 }
 
 function verificaLinha() {
