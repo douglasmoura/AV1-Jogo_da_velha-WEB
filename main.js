@@ -25,6 +25,7 @@ let verificaJogada = 'O';
 var tabuleiro = [[], [], []];
 bloquearTabuleiro(true);
 let contEmpate = 0;
+
 function limparTabuleiro() {
 
     for (let x = 0; x < tabuleiro.length; x++) {
@@ -61,6 +62,7 @@ function checkComecar() {
 
 function restart() {
     limparTabuleiro();
+    verificaJogada = 'O'
     jogador1 = '';
     jogador2 = '';
     botaoIniciar.disabled = true;
@@ -73,6 +75,7 @@ function restart() {
 }
 
 function comecar() {
+    verificaJogada = 'O'
     bloquearTabuleiro(false);
     botaoIniciar.disabled = true;
     txtJogador1.disabled = true;
@@ -90,13 +93,14 @@ function jogada(posX, posY) {
     if (verificaJogada == 'X') {
         verificaJogada = 'O';
         document.getElementById(pos).innerText = verificaJogada;
-        document.getElementById(pos).classList.toggle("tabuleiro-jogada2");
+        document.getElementById(pos).classList.add("tabuleiro-jogada2");
         document.getElementById(pos).disabled = true;
         tabuleiro[posX][posY] = verificaJogada;
 
     } else {
         verificaJogada = 'X';
         document.getElementById(pos).innerText = verificaJogada;
+        document.getElementById(pos).classList.remove("tabuleiro-jogada2");
         document.getElementById(pos).disabled = true;
         tabuleiro[posX][posY] = verificaJogada;
     }
@@ -111,7 +115,7 @@ function jogada(posX, posY) {
         } else {
             jogador2.vitorias++;
             openModal('dv-modal');
-            jogadorVencedor.innerText = `${jogador2.nome} ganhou ${jogador2.vitorias}/3`;
+            jogadorVencedor.innerText = `${jogador2.nome} ganhou ${jogador2.vitorias}/3!!`;
             comecar();
             contEmpate = 0;
         }
